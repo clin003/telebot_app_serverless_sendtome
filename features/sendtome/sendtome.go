@@ -73,8 +73,17 @@ func OnPrivateSendToMe(c tele.Context) error {
 		reciver := &tele.User{
 			ID: reciverId, //int64(reciverId),
 		}
+		selector := &tele.ReplyMarkup{}
+		btnList := make([]tele.Btn, 0)
+		btn := selector.Data("↩️", "reply", string(c.Message().Sender.ID))
+		btnList = append(btnList, btn)
+		selector.Inline(
+			selector.Row(
+				btnList...,
+			),
+		)
 
-		return c.ForwardTo(reciver)
+		return c.ForwardTo(reciver, selector)
 	}
 	if c.Message().IsReply() {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
