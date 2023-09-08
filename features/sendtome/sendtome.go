@@ -75,7 +75,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 		}
 		selector := &tele.ReplyMarkup{}
 		btnList := make([]tele.Btn, 0)
-		btn := selector.Data("↩️", "reply", string(c.Message().Sender.ID))
+		btn := selector.Data("↩️reply", "reply", string(c.Message().Sender.ID))
 		btnList = append(btnList, btn)
 		selector.Inline(
 			selector.Row(
