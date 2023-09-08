@@ -57,8 +57,8 @@ func OnPrivateSendToMe(c tele.Context) error {
 	}
 	sendToMeID := os.Getenv("SENDTOME_ID")
 	// 管理员回复信息
-	fmt.Println("c.Message().Sender.ID", c.Message().Sender.ID)
-	fmt.Println("sendToMeID", sendToMeID)
+	fmt.Println("c.Message().Sender.ID", c.Message().Sender.ID, string(c.Message().Sender.ID), c.Message().IsReply())
+	fmt.Println("sendToMeID", sendToMeID, c.Message().IsReply())
 	if c.Message().IsReply() && strings.EqualFold(string(c.Message().Sender.ID), sendToMeID) {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
 			fmt.Println("收到回复消息(err)：", c.Message())
