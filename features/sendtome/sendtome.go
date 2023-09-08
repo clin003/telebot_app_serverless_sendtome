@@ -56,6 +56,17 @@ func OnPrivateSendToMe(c tele.Context) error {
 		return nil
 	}
 	sendToMeID := os.Getenv("SENDTOME_ID")
+	// 管理员回复信息
+	if c.Message().IsReply() && strings.EqualFold(string(c.Message().Sender.ID), sendToMeID) {
+		if jsonText, err := json.Marshal(c.Message()); err != nil {
+			fmt.Println("收到回复消息(err)：", c.Message())
+		} else {
+			fmt.Println("收到回复消息：", string(jsonText))
+		}
+
+		return nil
+	}
+	// 收到私聊消息
 	if c.Message().Private() && !strings.EqualFold(string(c.Message().Sender.ID), sendToMeID) {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
 			fmt.Println("收到私聊消息(err)：", c.Message())
@@ -73,19 +84,9 @@ func OnPrivateSendToMe(c tele.Context) error {
 		reciver := &tele.User{
 			ID: reciverId, //int64(reciverId),
 		}
-		// selector := &tele.ReplyMarkup{}
-		// btnList := make([]tele.Btn, 0)
-		// // btn := selector.Data("↩️reply", "reply", string(c.Message().Sender.ID))
-		// btn := selector.Text("sendTo " + string(c.Message().Sender.ID))
-		// btnList = append(btnList, btn)
-		// selector.Reply(
-		// 	selector.Row(
-		// 		btnList...,
-		// 	),
-		// )
 
 		// return c.ForwardTo(reciver, selector)
-		if _, err := c.Bot().Copy(reciver, c.Message()); err != nil {
+		if _, err := c.Bot().Forward(reciver, c.Message()); err != nil {
 			return err
 		}
 
