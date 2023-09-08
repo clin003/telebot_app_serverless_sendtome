@@ -55,14 +55,15 @@ func OnPrivateSendToMe(c tele.Context) error {
 	if _, ok := syncMap.LoadOrStore(msgId, ""); ok {
 		return nil
 	}
-	sendToMeID := os.Getenv("SENDTOME_ID")
-	if len(sendToMeID) == 0 {
+	adminID := os.Getenv("SENDTOME_ID")
+	if len(adminID) == 0 {
 		return nil
 	}
+	senderID := fmt.Sprintf("%d", c.Message().Sender.ID)
 	// 管理员回复信息
-	fmt.Println("c.Message().Sender.ID", c.Message().Sender.ID, string(c.Message().Sender.ID), c.Message().IsReply())
-	fmt.Println("sendToMeID", sendToMeID, c.Message().IsReply())
-	if c.Message().IsReply() && strings.EqualFold(fmt.Sprintf("%d", c.Message().Sender.ID), sendToMeID) {
+	fmt.Println("c.Message().Sender.ID", c.Message().Sender.ID, senderID, c.Message().IsReply())
+	fmt.Println("adminID", adminID, c.Message().IsReply())
+	if c.Message().IsReply() && strings.EqualFold(senderID, adminID) {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
 			fmt.Println("收到回复消息(err)：", c.Message())
 		} else {
@@ -72,22 +73,22 @@ func OnPrivateSendToMe(c tele.Context) error {
 		return nil
 	}
 	// 收到私聊消息
-	if c.Message().Private() && !strings.EqualFold(string(c.Message().Sender.ID), sendToMeID) {
+	if c.Message().Private() && !strings.EqualFold(senderID, adminID) {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
 			fmt.Println("收到私聊消息(err)：", c.Message())
 		} else {
 			fmt.Println("收到私聊消息：", string(jsonText))
 		}
 
-		reciverId, err := strconv.ParseInt(sendToMeID, 10, 64)
+		reciverId, err := strconv.ParseInt(adminID, 10, 64)
 		if err != nil {
-			fmt.Println("设置有误：环境变量(SENDTOME_ID)：", sendToMeID)
+			fmt.Println("设置有误：环境变量(SENDTOME_ID)：", adminID)
 		}
 		reciver := &tele.User{
 			ID: reciverId, //int64(reciverId),
 		}
 
-		newMsg := fmt.Sprintf("@%s:%d\n%s",
+		newMsg := fmt.Sprintf("@%s :%d\n%s",
 			c.Message().Sender.Username,
 			c.Message().Sender.ID,
 			c.Message().Text)
@@ -97,7 +98,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 		}
 		return nil
 	}
-	what := fmt.Sprintf("%s %s\n@%s:%d\nIs Owner\n%s",
+	what := fmt.Sprintf("@%s :%d\n%s %s\nHi Admin!!!\n%s",
 		c.Message().Sender.FirstName,
 		c.Message().Sender.LastName,
 		c.Message().Sender.Username,
