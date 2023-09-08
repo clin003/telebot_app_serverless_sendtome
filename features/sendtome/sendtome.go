@@ -67,6 +67,9 @@ func OnPrivateSendToMe(c tele.Context) error {
 			return nil
 		}
 		reciverId, err := strconv.ParseInt(sendToMeID, 10, 64)
+		if err != nil {
+			fmt.Println("设置有误：环境变量(SENDTOME_ID)：", sendToMeID)
+		}
 		reciver := &tele.User{
 			ID: reciverId, //int64(reciverId),
 		}
