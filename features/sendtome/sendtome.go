@@ -57,7 +57,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 
 	if c.Message().Private() {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
-			fmt.Println("收到私聊消息：", string(jsonText))
+			fmt.Println("收到私聊消息(err)：", string(jsonText))
 		} else {
 			fmt.Println("收到私聊消息：", c.Message())
 		}
@@ -78,7 +78,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 	}
 	if c.Message().IsReply() {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
-			fmt.Println("收到回复消息：", string(jsonText))
+			fmt.Println("收到回复消息(err)：", string(jsonText))
 		} else {
 			fmt.Println("收到回复消息：", c.Message())
 		}
