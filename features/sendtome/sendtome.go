@@ -61,15 +61,33 @@ func OnPrivateSendToMe(c tele.Context) error {
 	}
 	senderID := fmt.Sprintf("%d", c.Message().Sender.ID)
 	// 管理员回复信息
-	fmt.Println("c.Message().Sender.ID", c.Message().Sender.ID, senderID, c.Message().IsReply())
-	fmt.Println("adminID", adminID, c.Message().IsReply())
+	// fmt.Println("c.Message().Sender.ID", c.Message().Sender.ID, senderID, c.Message().IsReply())
+	// fmt.Println("adminID", adminID, c.Message().IsReply())
 	if c.Message().IsReply() && strings.EqualFold(senderID, adminID) {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
 			fmt.Println("收到回复消息(err)：", c.Message())
 		} else {
 			fmt.Println("收到回复消息：", string(jsonText))
 		}
+		prefixLine, _, isFound := strings.Cut(c.Message().ReplyTo.Text, "\n")
+		if !isFound {
+			c.Reply("回复消息格式异常：" + c.Message().ReplyTo.Text)
+		}
+		_, sendToID, isFound := strings.Cut(prefixLine, ":")
+		if !isFound {
+			c.Reply("回复消息格式异常：" + c.Message().ReplyTo.Text)
+		}
 
+		reciverId, err := strconv.ParseInt(sendToID, 10, 64)
+		if err != nil {
+			fmt.Print("回复消息格式异常：待回复id %s\n%s", sendToID, c.Message().ReplyTo.Text)
+		}
+		reciver := &tele.User{
+			ID: reciverId, //int64(reciverId),
+		}
+		if _, err := c.Bot().Send(reciver, c.Message().Text); err != nil {
+			return err
+		}
 		return nil
 	}
 	// 收到私聊消息
