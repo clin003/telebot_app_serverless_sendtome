@@ -8,6 +8,8 @@ echo "APP_VERSION = \"${VERSION}\")" >> ./baicai/version.go
 go fmt ./baicai
 
 
+rm ./main/main
+
 #git init #
 git add .
 git commit -m "v${VERSION} debug"
