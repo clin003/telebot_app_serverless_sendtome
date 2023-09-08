@@ -73,18 +73,23 @@ func OnPrivateSendToMe(c tele.Context) error {
 		reciver := &tele.User{
 			ID: reciverId, //int64(reciverId),
 		}
-		selector := &tele.ReplyMarkup{}
-		btnList := make([]tele.Btn, 0)
-		// btn := selector.Data("↩️reply", "reply", string(c.Message().Sender.ID))
-		btn := selector.Text("sendTo " + string(c.Message().Sender.ID))
-		btnList = append(btnList, btn)
-		selector.Reply(
-			selector.Row(
-				btnList...,
-			),
-		)
+		// selector := &tele.ReplyMarkup{}
+		// btnList := make([]tele.Btn, 0)
+		// // btn := selector.Data("↩️reply", "reply", string(c.Message().Sender.ID))
+		// btn := selector.Text("sendTo " + string(c.Message().Sender.ID))
+		// btnList = append(btnList, btn)
+		// selector.Reply(
+		// 	selector.Row(
+		// 		btnList...,
+		// 	),
+		// )
 
-		return c.ForwardTo(reciver, selector)
+		// return c.ForwardTo(reciver, selector)
+		if _, err := c.Bot().Forward(reciver, c.Message()); err != nil {
+			return err
+		}
+
+		return nil
 	}
 	if c.Message().IsReply() {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
@@ -92,7 +97,6 @@ func OnPrivateSendToMe(c tele.Context) error {
 		} else {
 			fmt.Println("收到回复消息：", string(jsonText))
 		}
-
 	}
 	return nil
 }
