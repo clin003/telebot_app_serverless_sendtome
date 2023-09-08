@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 	"sync"
 
 	"github.com/clin003/tgbot_app_dev/features"
@@ -54,15 +55,14 @@ func OnPrivateSendToMe(c tele.Context) error {
 	if _, ok := syncMap.LoadOrStore(msgId, ""); ok {
 		return nil
 	}
-
-	if c.Message().Private() {
+	sendToMeID := os.Getenv("SENDTOME_ID")
+	if c.Message().Private() && !strings.EqualFold(string(c.Message().Sender.ID), sendToMeID) {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
-			fmt.Println("收到私聊消息(err)：", string(jsonText))
+			fmt.Println("收到私聊消息(err)：", c.Message())
 		} else {
-			fmt.Println("收到私聊消息：", c.Message())
+			fmt.Println("收到私聊消息：", string(jsonText))
 		}
 
-		sendToMeID := os.Getenv("SENDTOME_ID")
 		if len(sendToMeID) <= 0 {
 			return nil
 		}
@@ -78,9 +78,9 @@ func OnPrivateSendToMe(c tele.Context) error {
 	}
 	if c.Message().IsReply() {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
-			fmt.Println("收到回复消息(err)：", string(jsonText))
+			fmt.Println("收到回复消息(err)：", c.Message())
 		} else {
-			fmt.Println("收到回复消息：", c.Message())
+			fmt.Println("收到回复消息：", string(jsonText))
 		}
 
 	}
