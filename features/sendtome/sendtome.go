@@ -85,7 +85,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 		// )
 
 		// return c.ForwardTo(reciver, selector)
-		if _, err := c.Bot().Forward(reciver, c.Message()); err != nil {
+		if _, err := c.Bot().Copy(reciver, c.Message()); err != nil {
 			return err
 		}
 
