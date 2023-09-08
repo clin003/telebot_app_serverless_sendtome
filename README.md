@@ -1,5 +1,7 @@
 A serverless Telegram bot
 
+双向私聊机器人，这里是为双向用户无法联系而提供的解决方案！
+
 # Baicai TGBot
 
 A Telegram bot
