@@ -98,7 +98,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 		}
 		return nil
 	}
-	what := fmt.Sprintf("@%s :%d\n%s %s\nHi Admin!!!\n%s",
+	what := fmt.Sprintf("@%s :%d\n%s %s\nHi Admin,别逗了!\n%s",
 		c.Message().Sender.FirstName,
 		c.Message().Sender.LastName,
 		c.Message().Sender.Username,
