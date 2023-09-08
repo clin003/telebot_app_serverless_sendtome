@@ -73,11 +73,11 @@ func OnPrivateSendToMe(c tele.Context) error {
 		reciver := &tele.User{
 			ID: reciverId, //int64(reciverId),
 		}
-		selector := &tele.ReplyMarkup{}
+		selector := &tele.ReplyMarkup{ResizeKeyboard: true}
 		btnList := make([]tele.Btn, 0)
 		btn := selector.Data("↩️reply", "reply", string(c.Message().Sender.ID))
 		btnList = append(btnList, btn)
-		selector.Inline(
+		selector.Reply(
 			selector.Row(
 				btnList...,
 			),
