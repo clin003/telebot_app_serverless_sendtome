@@ -11,8 +11,8 @@ go fmt ./baicai
 #git init #
 git add .
 git commit -m "v${VERSION} debug"
-#git remote add gitee git@gitee.com:lyhuilin/${APPNAME}.git #
-git remote add github git@github.com:clin003/${APPNAME}.git #
+##git remote add gitee git@gitee.com:lyhuilin/${APPNAME}.git #
+#git remote add github git@github.com:clin003/${APPNAME}.git #
 git branch -M main #
 #git push -u gitee main
 git push -u github main

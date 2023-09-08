@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strconv"
 	"sync"
 
 	"github.com/clin003/tgbot_app_dev/features"
@@ -56,12 +57,12 @@ func OnPrivateSendToMe(c tele.Context) error {
 
 	if c.Message().Private() {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
-			fmt.Println("收到私聊消息：", c.Message())
+			fmt.Println("收到私聊消息：", string(jsonText))
 		} else {
 			fmt.Println("收到私聊消息：", c.Message())
 		}
 
-		sendToMeID = os.Getenv("SENDTOME_ID")
+		sendToMeID := os.Getenv("SENDTOME_ID")
 		if len(sendToMeID) <= 0 {
 			return nil
 		}
