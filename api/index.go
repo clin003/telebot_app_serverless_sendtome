@@ -44,25 +44,25 @@ func init() {
 	})
 	common.Must(err)
 
-	commands := []tele.Command{
-		{
-			Text:        "/id",
-			Description: "Getid",
-		},
-		{
-			Text:        "/ping",
-			Description: "Ping",
-		},
-		{
-			Text:        "/about",
-			Description: "About",
-		},
-		{
-			Text:        "/start",
-			Description: "Start",
-		},
-	}
-	bot.SetCommands(commands)
+	// commands := []tele.Command{
+	// 	{
+	// 		Text:        "/id",
+	// 		Description: "Getid",
+	// 	},
+	// 	{
+	// 		Text:        "/ping",
+	// 		Description: "Ping",
+	// 	},
+	// 	{
+	// 		Text:        "/about",
+	// 		Description: "About",
+	// 	},
+	// 	{
+	// 		Text:        "/start",
+	// 		Description: "Start",
+	// 	},
+	// }
+	// bot.SetCommands(commands)
 	webhookURL := os.Getenv("BAICAI_BOT_TELEGRAM_WEBHOOK_URL")
 	if len(webhookURL) > 0 && strings.HasPrefix(webhookURL, "https") {
 		utils.SetTelegramWebhook(botToken, webhookURL)
