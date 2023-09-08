@@ -56,6 +56,9 @@ func OnPrivateSendToMe(c tele.Context) error {
 		return nil
 	}
 	sendToMeID := os.Getenv("SENDTOME_ID")
+	if len(sendToMeID) == 0 {
+		return nil
+	}
 	// 管理员回复信息
 	fmt.Println("c.Message().Sender.ID", c.Message().Sender.ID, string(c.Message().Sender.ID), c.Message().IsReply())
 	fmt.Println("sendToMeID", sendToMeID, c.Message().IsReply())
@@ -76,9 +79,6 @@ func OnPrivateSendToMe(c tele.Context) error {
 			fmt.Println("收到私聊消息：", string(jsonText))
 		}
 
-		if len(sendToMeID) <= 0 {
-			return nil
-		}
 		reciverId, err := strconv.ParseInt(sendToMeID, 10, 64)
 		if err != nil {
 			fmt.Println("设置有误：环境变量(SENDTOME_ID)：", sendToMeID)
@@ -87,19 +87,29 @@ func OnPrivateSendToMe(c tele.Context) error {
 			ID: reciverId, //int64(reciverId),
 		}
 
-		// return c.ForwardTo(reciver, selector)
-		if _, err := c.Bot().Forward(reciver, c.Message()); err != nil {
+		newMsg := fmt.Sprintf("@%s:%d\n%s",
+			c.Message().Sender.Username,
+			c.Message().Sender.ID,
+			c.Message().Text)
+
+		if _, err := c.Bot().Send(reciver, newMsg); err != nil {
 			return err
 		}
-
 		return nil
 	}
-	if c.Message().IsReply() {
-		if jsonText, err := json.Marshal(c.Message()); err != nil {
-			fmt.Println("收到回复消息(err)：", c.Message())
-		} else {
-			fmt.Println("收到回复消息：", string(jsonText))
-		}
-	}
-	return nil
+	what := fmt.Sprintf("%s %s\n@%s:%d\nIs Owner\n%s",
+		c.Message().Sender.FirstName,
+		c.Message().Sender.LastName,
+		c.Message().Sender.Username,
+		c.Message().Sender.ID,
+		c.Message().Text)
+	return c.Reply(what)
+	// if c.Message().IsReply() {
+	// 	if jsonText, err := json.Marshal(c.Message()); err != nil {
+	// 		fmt.Println("收到回复消息(err)：", c.Message())
+	// 	} else {
+	// 		fmt.Println("收到回复消息：", string(jsonText))
+	// 	}
+	// }
+	// return nil
 }
