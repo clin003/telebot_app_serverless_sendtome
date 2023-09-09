@@ -96,7 +96,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 			ID: reciverId, //int64(reciverId),
 		}
 
-		newMsg := fmt.Sprintf("@%s #id%d\n\n%s",
+		newMsg := fmt.Sprintf("@%s #id%d\n%s",
 			c.Message().Sender.Username,
 			c.Message().Sender.ID,
 			c.Message().Text)
