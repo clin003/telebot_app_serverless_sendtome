@@ -73,7 +73,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 		if !isFound {
 			c.Reply("回复消息格式异常：" + c.Message().ReplyTo.Text)
 		}
-		_, sendToID, isFound := strings.Cut(prefixLine, ":")
+		_, sendToID, isFound := strings.Cut(prefixLine, "#")
 		if !isFound {
 			c.Reply("回复消息格式异常：" + c.Message().ReplyTo.Text)
 		}
@@ -106,7 +106,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 			ID: reciverId, //int64(reciverId),
 		}
 
-		newMsg := fmt.Sprintf("@%s :%d\n%s",
+		newMsg := fmt.Sprintf("@%s #%d\n\n%s",
 			c.Message().Sender.Username,
 			c.Message().Sender.ID,
 			c.Message().Text)
@@ -116,19 +116,11 @@ func OnPrivateSendToMe(c tele.Context) error {
 		}
 		return nil
 	}
-	what := fmt.Sprintf("@%s :%d\n%s %s\nHi Admin,别逗了!\n%s",
+	what := fmt.Sprintf("@%s #%d\n%s %s\nHi,Admin! 别逗了，宝！\n%s",
 		c.Message().Sender.Username,
 		c.Message().Sender.ID,
 		c.Message().Sender.FirstName,
 		c.Message().Sender.LastName,
 		c.Message().Text)
 	return c.Reply(what)
-	// if c.Message().IsReply() {
-	// 	if jsonText, err := json.Marshal(c.Message()); err != nil {
-	// 		fmt.Println("收到回复消息(err)：", c.Message())
-	// 	} else {
-	// 		fmt.Println("收到回复消息：", string(jsonText))
-	// 	}
-	// }
-	// return nil
 }
