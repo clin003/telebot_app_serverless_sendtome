@@ -36,15 +36,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 		!c.Message().IsReply() {
 		return nil
 	}
-	// // fmt.Println("OnPrivateSendToMe", 1)
-	// if !(c.Message().OriginalChat != nil) || !(c.Message().SenderChat != nil) {
-	// 	return nil
-	// }
-	// // fmt.Println("OnPrivateSendToMe", 2)
-	// if c.Message().OriginalChat.Type != tele.ChatPrivate ||
-	// 	c.Message().SenderChat.Type != tele.ChatPrivate {
-	// 	return nil
-	// }
+
 	msgId := ""
 	if len(c.Message().AlbumID) > 0 {
 		msgId = fmt.Sprintf("%d_%s", c.Message().Chat.ID, c.Message().AlbumID)
@@ -61,8 +53,6 @@ func OnPrivateSendToMe(c tele.Context) error {
 	}
 	senderID := fmt.Sprintf("%d", c.Message().Sender.ID)
 	// 管理员回复信息
-	// fmt.Println("c.Message().Sender.ID", c.Message().Sender.ID, senderID, c.Message().IsReply())
-	// fmt.Println("adminID", adminID, c.Message().IsReply())
 	if c.Message().IsReply() && strings.EqualFold(senderID, adminID) {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
 			fmt.Println("收到回复消息(err)：", c.Message())
@@ -71,11 +61,11 @@ func OnPrivateSendToMe(c tele.Context) error {
 		}
 		prefixLine, _, isFound := strings.Cut(c.Message().ReplyTo.Text, "\n")
 		if !isFound {
-			c.Reply("回复消息格式异常：" + c.Message().ReplyTo.Text)
+			return c.Reply("回复消息格式异常：" + c.Message().ReplyTo.Text)
 		}
-		_, sendToID, isFound := strings.Cut(prefixLine, "#")
+		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
 		if !isFound {
-			c.Reply("回复消息格式异常：" + c.Message().ReplyTo.Text)
+			return c.Reply("回复消息格式异常：" + c.Message().ReplyTo.Text)
 		}
 
 		reciverId, err := strconv.ParseInt(sendToID, 10, 64)
@@ -106,7 +96,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 			ID: reciverId, //int64(reciverId),
 		}
 
-		newMsg := fmt.Sprintf("@%s #%d\n\n%s",
+		newMsg := fmt.Sprintf("@%s #id%d\n\n%s",
 			c.Message().Sender.Username,
 			c.Message().Sender.ID,
 			c.Message().Text)
@@ -116,7 +106,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 		}
 		return nil
 	}
-	what := fmt.Sprintf("@%s #%d\n%s %s\nHi,Admin! 别逗了，宝！\n%s",
+	what := fmt.Sprintf("@%s #id%d\n%s %s\nHi,Admin! 别逗了，宝！\n%s",
 		c.Message().Sender.Username,
 		c.Message().Sender.ID,
 		c.Message().Sender.FirstName,
