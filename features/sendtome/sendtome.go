@@ -76,9 +76,11 @@ func OnPrivateSendToMe(c tele.Context) error {
 			ID: reciverId, //int64(reciverId),
 		}
 		if _, err := c.Bot().Send(reciver, c.Message().Text); err != nil {
-			return err
+			// return err
+			return c.Reply("⚠️回复内容转投失败，请重试。" + err.Error())
 		}
-		return nil
+		// return nil
+		return c.Reply("✅回复内容转投成功。")
 	}
 	// 收到私聊消息
 	if c.Message().Private() && !strings.EqualFold(senderID, adminID) {
@@ -103,8 +105,10 @@ func OnPrivateSendToMe(c tele.Context) error {
 
 		if _, err := c.Bot().Send(reciver, newMsg); err != nil {
 			return err
+			// return c.Reply("感谢！⚠️私聊内容转投失败。" + err.Error())
 		}
 		return nil
+		// return c.Reply("感谢！✅私聊内容转投成功。")
 	}
 	what := fmt.Sprintf("@%s #id%d\n%s %s\nHi,Admin! 别逗了，宝！\n%s",
 		c.Message().Sender.Username,
