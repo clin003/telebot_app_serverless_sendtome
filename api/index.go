@@ -45,10 +45,10 @@ func init() {
 	common.Must(err)
 
 	commands := []tele.Command{
-		// {
-		// 	Text:        "/id",
-		// 	Description: "Getid",
-		// },
+		{
+			Text:        "/id",
+			Description: "Getid",
+		},
 		{
 			Text:        "/ping",
 			Description: "Ping",

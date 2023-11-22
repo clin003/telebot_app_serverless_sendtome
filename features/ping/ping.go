@@ -8,6 +8,9 @@ import (
 	tele "gopkg.in/telebot.v3"
 )
 
+func init() {
+	features.RegisterFeature("/ping", OnPing)
+}
 func OnPing(c tele.Context) error {
 	if !c.Message().Private() {
 		return c.Reply("pong")
@@ -19,8 +22,4 @@ func OnPing(c tele.Context) error {
 	return c.Reply(text)
 	// c.Delete()
 	// return c.Send(text)
-}
-
-func init() {
-	features.RegisterFeature("/ping", OnPing)
 }
