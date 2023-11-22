@@ -10,7 +10,6 @@ import (
 
 func OnPing(c tele.Context) error {
 	if !c.Message().Private() {
-		// c.Delete()
 		return c.Reply("pong")
 	}
 	text := fmt.Sprintf("Pong! %s%s @%s(%d)",

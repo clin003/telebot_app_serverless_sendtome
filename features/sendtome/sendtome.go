@@ -17,17 +17,9 @@ var syncMap sync.Map
 
 func init() {
 	features.RegisterFeature(tele.OnText, OnPrivateSendToMe)
-	// features.RegisterFeature(tele.OnPhoto, OnChannelLinkGroup)
-	// features.RegisterFeature(tele.OnVideo, OnChannelLinkGroup)
-	// features.RegisterFeature(tele.OnMedia, OnChannelLinkGroup)
-
-	// sendToMeID = os.Getenv("SENDTOME_ID")
 }
 
 func OnPrivateSendToMe(c tele.Context) error {
-	// if len(sendToMeID) <= 0 {
-	// 	return nil
-	// }
 	if c.Message().FromChannel() || c.Message().FromGroup() {
 		return nil
 	}
