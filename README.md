@@ -29,10 +29,11 @@ WELCOME_MSG
 
 ##  交流群
 
-交流TG群： @baicai_dev
+交流TG群： [@baicai_dev](https://t.me/baicai_pub)
 
-
+<!--
 ## 赞赏
 ![赞赏白菜林，多少不重要，1元也是支持](https://cdn.jsdelivr.net/gh/clin003/cdn/assets/images/zanalipay.jpg)
 
 ![赞赏白菜林，多少不重要，1元也是支持](https://cdn.jsdelivr.net/gh/clin003/cdn/assets/images/zanweixin.jpg)
+-->
