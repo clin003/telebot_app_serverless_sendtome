@@ -13,11 +13,12 @@ func OnPing(c tele.Context) error {
 		return c.Reply("pong")
 	}
 	text := fmt.Sprintf("Pong! %s%s @%s(%d)",
-		c.Message().Sender.FirstName, c.Message().Sender.LastName, c.Message().Sender.Username, c.Message().Sender.ID)
-
-	c.Delete()
-	// return c.Reply(text)
-	return c.Send(text)
+		c.Message().Sender.FirstName, c.Message().Sender.LastName,
+		c.Message().Sender.Username, c.Message().Sender.ID,
+	)
+	return c.Reply(text)
+	// c.Delete()
+	// return c.Send(text)
 }
 
 func init() {
