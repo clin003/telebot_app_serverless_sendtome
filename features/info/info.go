@@ -13,9 +13,9 @@ func init() {
 	features.RegisterFeature("/info", OnInfo)
 }
 func OnInfo(c tele.Context) error {
-	if !c.Message().Private() {
-		return nil
-	}
+	// if !c.Message().Private() {
+	// 	return nil
+	// }
 	// c.Bot().ChatByID()
 	payload := c.Message().Payload
 	chatUsername := ""
