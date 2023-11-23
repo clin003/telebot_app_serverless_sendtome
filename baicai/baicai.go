@@ -1,7 +1,7 @@
 package baicai
 
 const (
-	APP_ABOUT = "TG BOT."
+	APP_ABOUT = "TG SendToMe BOT."
 	APP_SRC   = "https://github.com/clin003/telebot_app_serverless_sendtome"
 )
 

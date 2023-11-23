@@ -1,12 +1,14 @@
 A serverless Telegram bot
 
+TG SendToMe BOT
+
 Telegram 全功能私聊机器人
 
 双向私聊机器人，这里是为双向用户无法联系而提供的解决方案！
 
-# Baicai TGBot
+# TG SendToMe BOT
 
-A Telegram bot
+A Telegram bot 双向私聊机器人
 
 ## 部署到 Vercel
 
