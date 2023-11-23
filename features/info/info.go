@@ -33,7 +33,7 @@ func OnInfo(c tele.Context) error {
 		}
 	}
 	if len(chatUsername) == 0 {
-		return c.Reply("请输入username，例如 `/info @公开群组频道用户名`", tele.ModeMarkdownV2)
+		return c.Reply("请输入username，\n例如 `/info @公开群组频道用户名`", tele.ModeMarkdownV2)
 	}
 
 	chat, err := c.Bot().ChatByUsername(chatUsername)
