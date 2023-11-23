@@ -47,7 +47,11 @@ func init() {
 	commands := []tele.Command{
 		{
 			Text:        "/id",
-			Description: "Getid",
+			Description: "查询自己的用户id信息",
+		},
+		{
+			Text:        "/info",
+			Description: "查询公开群组频道信息",
 		},
 		{
 			Text:        "/ping",

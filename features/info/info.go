@@ -32,10 +32,13 @@ func OnInfo(c tele.Context) error {
 			return c.Reply("格式错误🙅:" + payload)
 		}
 	}
+	if len(chatUsername) == 0 {
+		return c.Reply("请输入username，例如 `/info @公开群组频道用户名`", tele.ModeMarkdownV2)
+	}
 
 	chat, err := c.Bot().ChatByUsername(chatUsername)
 	if err != nil {
-		return c.Reply(err.Error())
+		return c.Reply("本次查询失败(请使用公开群组或频道链接查询): " + err.Error())
 	}
 
 	text := fmt.Sprintf("%s id: %d", chat.Type, chat.ID)

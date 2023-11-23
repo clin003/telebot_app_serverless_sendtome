@@ -28,9 +28,10 @@ func OnGetID(c tele.Context) error {
 		}
 	}
 
-	if !c.Message().Private() {
-		c.Bot().Send(c.Sender(), text)
-		return c.Reply(text)
-	}
-	return c.Send(text)
+	return c.Reply(text)
+	// if !c.Message().Private() {
+	// 	c.Bot().Send(c.Sender(), text)
+	// 	return c.Reply(text)
+	// }
+	// return c.Send(text)
 }

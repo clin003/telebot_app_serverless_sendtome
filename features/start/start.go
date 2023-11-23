@@ -22,7 +22,8 @@ func Onstart(c tele.Context) error {
 			"双向用户直接在这里发消息就可以，我可以收到，并且回复你！"
 	}
 	if len(welcomeMsg) > 0 {
-		return c.Send(welcomeMsg)
+		// return c.Send(welcomeMsg)
+		return c.Reply(welcomeMsg)
 	}
 	return nil
 }
