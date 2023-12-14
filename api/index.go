@@ -46,6 +46,10 @@ func init() {
 
 	commands := []tele.Command{
 		{
+			Text:        "/start",
+			Description: "Start",
+		},
+		{
 			Text:        "/id",
 			Description: "查询自己的用户id信息",
 		},
@@ -62,13 +66,9 @@ func init() {
 			Description: "About",
 		},
 		{
-			Text:        "/start",
-			Description: "Start",
+			Text:        "/sendcrypto",
+			Description: "Send crypto (发送加密货币)",
 		},
-		// {
-		// 	Text:        "/sendCrypto",
-		// 	Description: "Send crypto (发送加密货币)",
-		// },
 		// {
 		// 	Text:        "/sendCryptoUSDT",
 		// 	Description: "Send crypto USDT (发送加密货币 USDT)",
