@@ -66,6 +66,20 @@ func init() {
 			Description: "Start",
 		},
 	}
+
+	if len(os.Getenv("SEND_CRYPTO_MSG")) > 0 { //osenv.GetVideoAPI()
+		commands = append(commands, tele.Command{
+			Text:        "/sendCrypto",
+			Description: "Send crypto (发送加密货币)",
+		})
+	}
+	if len(os.Getenv("SEND_CRYPTO_USDT_MSG")) > 0 { //osenv.GetVideoAPI()
+		commands = append(commands, tele.Command{
+			Text:        "/sendCryptoUSDT",
+			Description: "Send crypto USDT (发送加密货币 USDT)",
+		})
+	}
+
 	bot.SetCommands(commands)
 	webhookURL := os.Getenv("BAICAI_BOT_TELEGRAM_WEBHOOK_URL")
 	if len(webhookURL) > 0 && strings.HasPrefix(webhookURL, "https") {
