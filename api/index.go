@@ -65,10 +65,11 @@ func init() {
 			Text:        "/about",
 			Description: "About",
 		},
-		{
-			Text:        "/sendcrypto",
-			Description: "Send crypto (发送加密货币)",
-		},
+
+		// {
+		// 	Text:        "/sendcrypto",
+		// 	Description: "Send crypto (发送加密货币)",
+		// },
 		// {
 		// 	Text:        "/sendCryptoUSDT",
 		// 	Description: "Send crypto USDT (发送加密货币 USDT)",
@@ -81,12 +82,12 @@ func init() {
 			Description: "Send crypto (发送加密货币)",
 		})
 	}
-	if len(os.Getenv("SEND_CRYPTO_USDT_MSG")) > 0 {
-		commands = append(commands, tele.Command{
-			Text:        "/sendUSDT",
-			Description: "Send crypto USDT (发送加密货币 USDT)",
-		})
-	}
+	// if len(os.Getenv("SEND_CRYPTO_USDT_MSG")) > 0 {
+	// 	commands = append(commands, tele.Command{
+	// 		Text:        "/sendUSDT",
+	// 		Description: "Send crypto USDT (发送加密货币 USDT)",
+	// 	})
+	// }
 
 	bot.SetCommands(commands)
 	webhookURL := os.Getenv("BAICAI_BOT_TELEGRAM_WEBHOOK_URL")
