@@ -65,6 +65,14 @@ func init() {
 			Text:        "/start",
 			Description: "Start",
 		},
+		{
+			Text:        "/sendCrypto",
+			Description: "Send crypto (发送加密货币)",
+		},
+		// {
+		// 	Text:        "/sendCryptoUSDT",
+		// 	Description: "Send crypto USDT (发送加密货币 USDT)",
+		// },
 	}
 
 	if len(os.Getenv("SEND_CRYPTO_MSG")) > 0 {
