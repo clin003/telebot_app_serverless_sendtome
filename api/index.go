@@ -65,10 +65,10 @@ func init() {
 			Text:        "/start",
 			Description: "Start",
 		},
-		{
-			Text:        "/sendCrypto",
-			Description: "Send crypto (发送加密货币)",
-		},
+		// {
+		// 	Text:        "/sendCrypto",
+		// 	Description: "Send crypto (发送加密货币)",
+		// },
 		// {
 		// 	Text:        "/sendCryptoUSDT",
 		// 	Description: "Send crypto USDT (发送加密货币 USDT)",
@@ -77,13 +77,13 @@ func init() {
 
 	if len(os.Getenv("SEND_CRYPTO_MSG")) > 0 {
 		commands = append(commands, tele.Command{
-			Text:        "/sendCrypto",
+			Text:        "/sendcrypto",
 			Description: "Send crypto (发送加密货币)",
 		})
 	}
 	if len(os.Getenv("SEND_CRYPTO_USDT_MSG")) > 0 {
 		commands = append(commands, tele.Command{
-			Text:        "/sendCryptoUSDT",
+			Text:        "/sendcryptoUSDT",
 			Description: "Send crypto USDT (发送加密货币 USDT)",
 		})
 	}

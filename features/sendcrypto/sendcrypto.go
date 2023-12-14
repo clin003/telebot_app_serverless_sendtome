@@ -8,8 +8,8 @@ import (
 )
 
 func init() {
-	features.RegisterFeature("/sendCrypto", OnSendCrypto)
-	features.RegisterFeature("/sendCryptoUSDT", OnSendCryptoUSDT)
+	features.RegisterFeature("/sendcrypto", OnSendCrypto)
+	features.RegisterFeature("/sendcryptoUSDT", OnSendCryptoUSDT)
 }
 
 // Command: /sendcrypto <PAYLOAD>
