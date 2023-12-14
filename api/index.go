@@ -61,11 +61,10 @@ func init() {
 			Text:        "/ping",
 			Description: "Ping",
 		},
-		{
-			Text:        "/about",
-			Description: "About",
-		},
-
+		// {
+		// 	Text:        "/about",
+		// 	Description: "About",
+		// },
 		// {
 		// 	Text:        "/sendcrypto",
 		// 	Description: "Send crypto (发送加密货币)",
