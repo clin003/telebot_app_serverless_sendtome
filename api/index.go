@@ -83,7 +83,7 @@ func init() {
 	}
 	if len(os.Getenv("SEND_CRYPTO_USDT_MSG")) > 0 {
 		commands = append(commands, tele.Command{
-			Text:        "/sendcryptoUSDT",
+			Text:        "/sendUSDT",
 			Description: "Send crypto USDT (发送加密货币 USDT)",
 		})
 	}
