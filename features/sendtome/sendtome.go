@@ -174,7 +174,7 @@ func OnPrivateSendToMeByPhoto(c tele.Context) error {
 			}
 			return c.Reply("✅回复内容转投成功。")
 		}
-		return c.Reply("⚠️回复内容转投失败，请重试。" + fmt.Errorf("获取图片信息失败: %+v", c.Message()))
+		return c.Reply("⚠️回复内容转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
 	}
 
 	// 收到私聊消息
