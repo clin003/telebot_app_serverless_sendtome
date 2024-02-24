@@ -12,7 +12,6 @@ import (
 	tele "gopkg.in/telebot.v3"
 )
 
-// var sendToMeID string
 var syncMap sync.Map
 
 // OnText              = "\atext"
