@@ -152,16 +152,16 @@ func OnPrivateSendToMeByPhoto(c tele.Context) error {
 		}
 		prefixLine, _, isFound := strings.Cut(c.Message().ReplyTo.Caption, "\n")
 		if !isFound {
-			return c.Reply("回复消息格式异常：" + c.Message().ReplyTo.Caption)
+			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
 		if !isFound {
-			return c.Reply("回复消息格式异常：" + c.Message().ReplyTo.Caption)
+			return c.Reply("回复消息格式异常(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 
 		reciverId, err := strconv.ParseInt(sendToID, 10, 64)
 		if err != nil {
-			fmt.Print("回复消息格式异常：待回复id %s\n%s", sendToID, c.Message().ReplyTo.Caption)
+			fmt.Print("回复消息格式异常：待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
 		}
 		reciver := &tele.User{
 			ID: reciverId,
