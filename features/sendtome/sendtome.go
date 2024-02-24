@@ -69,7 +69,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
 		if !isFound {
-			return c.Reply("回复消息格式异常(sendToID): " + +fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 
 		reciverId, err := strconv.ParseInt(sendToID, 10, 64)
@@ -82,11 +82,12 @@ func OnPrivateSendToMe(c tele.Context) error {
 
 		if _, err := c.Bot().Send(reciver, c.Message().Text); err != nil {
 			// return err
-			return c.Reply("⚠️回复内容转投失败，请重试。" + err.Error())
+			return c.Reply("⚠️回复内容转投失败，请重试: " + err.Error())
 		}
 		// return nil
 		return c.Reply("✅回复内容转投成功。")
 	}
+
 	// 收到私聊消息
 	if c.Message().Private() && !strings.EqualFold(senderID, adminID) {
 		if jsonText, err := json.Marshal(c.Message()); err != nil {
