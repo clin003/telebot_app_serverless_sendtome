@@ -67,7 +67,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 		if len(c.Message().ReplyTo.Caption) > 0 {
 			replyToText = c.Message().ReplyTo.Caption
 		}
-		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
+		prefixLine, _, isFound := strings.Cut(replyToText+"\n", "\n")
 		if !isFound {
 			return c.Reply(
 				fmt.Sprintf("回复消息格式异常(OnText)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
