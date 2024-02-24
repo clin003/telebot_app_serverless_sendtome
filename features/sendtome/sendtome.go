@@ -63,7 +63,11 @@ func OnPrivateSendToMe(c tele.Context) error {
 		} else {
 			fmt.Println("收到回复消息：", string(jsonText))
 		}
-		prefixLine, _, isFound := strings.Cut(c.Message().ReplyTo.Text, "\n")
+		replyToText := c.Message().ReplyTo.Text
+		if len(replyToText) == 0 && len(c.Message().ReplyTo.Caption) > 0 {
+			replyToText = c.Message().ReplyTo.Caption
+		}
+		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
 		if !isFound {
 			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
@@ -155,7 +159,11 @@ func OnPrivateSendToMeByPhoto(c tele.Context) error {
 		} else {
 			fmt.Println("收到回复消息：", string(jsonText))
 		}
-		prefixLine, _, isFound := strings.Cut(c.Message().ReplyTo.Text, "\n")
+		replyToText := c.Message().ReplyTo.Text
+		if len(replyToText) == 0 && len(c.Message().ReplyTo.Caption) > 0 {
+			replyToText = c.Message().ReplyTo.Caption
+		}
+		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
 		if !isFound {
 			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
@@ -255,7 +263,11 @@ func OnPrivateSendToMeByAudio(c tele.Context) error {
 		} else {
 			fmt.Println("收到回复消息：", string(jsonText))
 		}
-		prefixLine, _, isFound := strings.Cut(c.Message().ReplyTo.Text, "\n")
+		replyToText := c.Message().ReplyTo.Text
+		if len(replyToText) == 0 && len(c.Message().ReplyTo.Caption) > 0 {
+			replyToText = c.Message().ReplyTo.Caption
+		}
+		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
 		if !isFound {
 			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
@@ -354,7 +366,11 @@ func OnPrivateSendToMeByDocument(c tele.Context) error {
 		} else {
 			fmt.Println("收到回复消息：", string(jsonText))
 		}
-		prefixLine, _, isFound := strings.Cut(c.Message().ReplyTo.Text, "\n")
+		replyToText := c.Message().ReplyTo.Text
+		if len(replyToText) == 0 && len(c.Message().ReplyTo.Caption) > 0 {
+			replyToText = c.Message().ReplyTo.Caption
+		}
+		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
 		if !isFound {
 			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
@@ -453,7 +469,11 @@ func OnPrivateSendToMeByVideo(c tele.Context) error {
 		} else {
 			fmt.Println("收到回复消息：", string(jsonText))
 		}
-		prefixLine, _, isFound := strings.Cut(c.Message().ReplyTo.Text, "\n")
+		replyToText := c.Message().ReplyTo.Text
+		if len(replyToText) == 0 && len(c.Message().ReplyTo.Caption) > 0 {
+			replyToText = c.Message().ReplyTo.Caption
+		}
+		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
 		if !isFound {
 			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
@@ -552,7 +572,11 @@ func OnPrivateSendToMeByVoice(c tele.Context) error {
 		} else {
 			fmt.Println("收到回复消息：", string(jsonText))
 		}
-		prefixLine, _, isFound := strings.Cut(c.Message().ReplyTo.Text, "\n")
+		replyToText := c.Message().ReplyTo.Text
+		if len(replyToText) == 0 && len(c.Message().ReplyTo.Caption) > 0 {
+			replyToText = c.Message().ReplyTo.Caption
+		}
+		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
 		if !isFound {
 			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
