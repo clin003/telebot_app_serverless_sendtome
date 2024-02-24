@@ -69,16 +69,16 @@ func OnPrivateSendToMe(c tele.Context) error {
 		}
 		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
 		if !isFound {
-			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(OnText)(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
 		if !isFound {
-			return c.Reply("回复消息格式异常(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(OnText)(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 
 		reciverId, err := strconv.ParseInt(sendToID, 10, 64)
 		if err != nil {
-			fmt.Print("回复消息格式异常：待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
+			fmt.Print("回复消息格式异常(OnText): 待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
 		}
 		reciver := &tele.User{
 			ID: reciverId, //int64(reciverId),
@@ -165,16 +165,16 @@ func OnPrivateSendToMeByPhoto(c tele.Context) error {
 		}
 		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
 		if !isFound {
-			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(OnPhoto)(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
 		if !isFound {
-			return c.Reply("回复消息格式异常(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(OnPhoto)(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 
 		reciverId, err := strconv.ParseInt(sendToID, 10, 64)
 		if err != nil {
-			fmt.Print("回复消息格式异常：待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
+			fmt.Print("回复消息格式异常(OnPhoto): 待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
 		}
 		reciver := &tele.User{
 			ID: reciverId,
@@ -269,16 +269,16 @@ func OnPrivateSendToMeByAudio(c tele.Context) error {
 		}
 		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
 		if !isFound {
-			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(OnAudio)(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
 		if !isFound {
-			return c.Reply("回复消息格式异常(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(OnAudio)(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 
 		reciverId, err := strconv.ParseInt(sendToID, 10, 64)
 		if err != nil {
-			fmt.Print("回复消息格式异常：待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
+			fmt.Print("回复消息格式异常(OnAudio): 待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
 		}
 		reciver := &tele.User{
 			ID: reciverId,
@@ -372,16 +372,16 @@ func OnPrivateSendToMeByDocument(c tele.Context) error {
 		}
 		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
 		if !isFound {
-			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(OnDocument)(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
 		if !isFound {
-			return c.Reply("回复消息格式异常(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(OnDocument)(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 
 		reciverId, err := strconv.ParseInt(sendToID, 10, 64)
 		if err != nil {
-			fmt.Print("回复消息格式异常：待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
+			fmt.Print("回复消息格式异常(OnDocument): 待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
 		}
 		reciver := &tele.User{
 			ID: reciverId,
@@ -475,16 +475,16 @@ func OnPrivateSendToMeByVideo(c tele.Context) error {
 		}
 		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
 		if !isFound {
-			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(OnVideo)(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
 		if !isFound {
-			return c.Reply("回复消息格式异常(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(OnVideo)(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 
 		reciverId, err := strconv.ParseInt(sendToID, 10, 64)
 		if err != nil {
-			fmt.Print("回复消息格式异常：待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
+			fmt.Print("回复消息格式异常(OnVideo): 待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
 		}
 		reciver := &tele.User{
 			ID: reciverId,
@@ -578,16 +578,16 @@ func OnPrivateSendToMeByVoice(c tele.Context) error {
 		}
 		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
 		if !isFound {
-			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(OnVoice)(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
 		if !isFound {
-			return c.Reply("回复消息格式异常(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(OnVoice)(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 
 		reciverId, err := strconv.ParseInt(sendToID, 10, 64)
 		if err != nil {
-			fmt.Print("回复消息格式异常：待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
+			fmt.Print("回复消息格式异常(OnVoice): 待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
 		}
 		reciver := &tele.User{
 			ID: reciverId,
