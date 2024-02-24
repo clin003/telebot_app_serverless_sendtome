@@ -150,7 +150,7 @@ func OnPrivateSendToMeByPhoto(c tele.Context) error {
 		} else {
 			fmt.Println("收到回复消息：", string(jsonText))
 		}
-		prefixLine, _, isFound := strings.Cut(c.Message().ReplyTo.Caption, "\n")
+		prefixLine, _, isFound := strings.Cut(c.Message().ReplyTo.Text, "\n")
 		if !isFound {
 			return c.Reply("回复消息格式异常(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
@@ -169,6 +169,7 @@ func OnPrivateSendToMeByPhoto(c tele.Context) error {
 
 		if c.Message().Photo != nil {
 			newMsg := c.Message().Photo
+			// newMsg.Caption = c.Message().Photo.Caption
 			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
 				return c.Reply("⚠️回复内容转投失败，请重试。" + err.Error())
 			}
