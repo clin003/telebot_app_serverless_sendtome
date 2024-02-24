@@ -64,7 +64,7 @@ func OnPrivateSendToMe(c tele.Context) error {
 			fmt.Println("收到回复消息：", string(jsonText))
 		}
 		replyToText := c.Message().ReplyTo.Text
-		if len(replyToText) == 0 && len(c.Message().ReplyTo.Caption) > 0 {
+		if len(replyToText) == 0 || len(c.Message().ReplyTo.Caption) > 0 {
 			replyToText = c.Message().ReplyTo.Caption
 		}
 		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
