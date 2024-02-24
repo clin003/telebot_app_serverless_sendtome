@@ -185,13 +185,13 @@ func OnPrivateSendToMeByPhoto(c tele.Context) error {
 
 		if c.Message().Photo != nil {
 			newMsg := c.Message().Photo
-			if len(c.Message().Photo.Caption) > 0 {
-				newMsg.Caption = c.Message().Photo.Caption
+			if len(c.Message().Caption) > 0 {
+				newMsg.Caption = c.Message().Caption
 			}
 			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
 				return c.Reply("⚠️回复内容转投失败，请重试。" + err.Error())
 			}
-			return c.Reply("✅回复内容(OnPhoto)转投成功: " + fmt.Sprintf("%+v", c.Message()))
+			return c.Reply("✅回复内容(OnPhoto)转投成功")
 		}
 		return c.Reply("⚠️回复内容(OnPhoto)转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
 	}
@@ -293,8 +293,8 @@ func OnPrivateSendToMeByAudio(c tele.Context) error {
 
 		if c.Message().Audio != nil {
 			newMsg := c.Message().Audio
-			if len(c.Message().Audio.Caption) > 0 {
-				newMsg.Caption = c.Message().Audio.Caption
+			if len(c.Message().Caption) > 0 {
+				newMsg.Caption = c.Message().Caption
 			}
 			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
 				return c.Reply("⚠️回复内容(OnAudio)转投失败，请重试。" + err.Error())
@@ -401,8 +401,8 @@ func OnPrivateSendToMeByAnimation(c tele.Context) error {
 
 		if c.Message().Animation != nil {
 			newMsg := c.Message().Animation
-			if len(c.Message().Animation.Caption) > 0 {
-				newMsg.Caption = c.Message().Animation.Caption
+			if len(c.Message().Caption) > 0 {
+				newMsg.Caption = c.Message().Caption
 			}
 			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
 				return c.Reply("⚠️回复内容(OnAnimation)转投失败，请重试。" + err.Error())
@@ -509,8 +509,8 @@ func OnPrivateSendToMeByDocument(c tele.Context) error {
 
 		if c.Message().Document != nil {
 			newMsg := c.Message().Document
-			if len(c.Message().Document.Caption) > 0 {
-				newMsg.Caption = c.Message().Document.Caption
+			if len(c.Message().Caption) > 0 {
+				newMsg.Caption = c.Message().Caption
 			}
 			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
 				return c.Reply("⚠️回复内容(OnDocument)转投失败，请重试。" + err.Error())
@@ -617,13 +617,13 @@ func OnPrivateSendToMeByVideo(c tele.Context) error {
 
 		if c.Message().Video != nil {
 			newMsg := c.Message().Video
-			if len(c.Message().Video.Caption) > 0 {
-				newMsg.Caption = c.Message().Video.Caption
+			if len(c.Message().Caption) > 0 {
+				newMsg.Caption = c.Message().Caption
 			}
 			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
 				return c.Reply("⚠️回复内容(OnVideo)转投失败，请重试。" + err.Error())
 			}
-			return c.Reply("✅回复内容(OnVideo)转投成功。")
+			return c.Reply(fmt.Sprintf("✅回复内容(OnVideo)转投成功,Message():%+v", c.Message()))
 		}
 		return c.Reply("⚠️回复内容(OnVideo)转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
 	}
@@ -725,8 +725,8 @@ func OnPrivateSendToMeByVoice(c tele.Context) error {
 
 		if c.Message().Voice != nil {
 			newMsg := c.Message().Voice
-			if len(c.Message().Voice.Caption) > 0 {
-				newMsg.Caption = c.Message().Voice.Caption
+			if len(c.Message().Caption) > 0 {
+				newMsg.Caption = c.Message().Caption
 			}
 			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
 				return c.Reply("⚠️回复内容(OnVoice)转投失败，请重试。" + err.Error())
