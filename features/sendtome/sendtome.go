@@ -167,7 +167,7 @@ func OnPrivateSendToMeByPhoto(c tele.Context) error {
 		prefixLine, _, isFound := strings.Cut(replyToText+"\n", "\n")
 		if !isFound {
 			return c.Reply(
-				fmt.Sprintf("回复消息格式异常(OnText)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
+				fmt.Sprintf("回复消息格式异常(OnPhoto)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
 			)
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
@@ -185,13 +185,15 @@ func OnPrivateSendToMeByPhoto(c tele.Context) error {
 
 		if c.Message().Photo != nil {
 			newMsg := c.Message().Photo
-			// newMsg.Caption = c.Message().Photo.Caption
+			if len(c.Message().Photo.Caption) > 0 {
+				newMsg.Caption = c.Message().Photo.Caption
+			}
 			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
 				return c.Reply("⚠️回复内容转投失败，请重试。" + err.Error())
 			}
-			return c.Reply("✅回复内容转投成功。")
+			return c.Reply("✅回复内容(OnPhoto)转投成功: " + fmt.Sprintf("%+v", c.Message()))
 		}
-		return c.Reply("⚠️回复内容转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
+		return c.Reply("⚠️回复内容(OnPhoto)转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
 	}
 
 	// 收到私聊消息
@@ -273,7 +275,7 @@ func OnPrivateSendToMeByAudio(c tele.Context) error {
 		prefixLine, _, isFound := strings.Cut(replyToText+"\n", "\n")
 		if !isFound {
 			return c.Reply(
-				fmt.Sprintf("回复消息格式异常(OnText)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
+				fmt.Sprintf("回复消息格式异常(OnAudio)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
 			)
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
@@ -291,12 +293,15 @@ func OnPrivateSendToMeByAudio(c tele.Context) error {
 
 		if c.Message().Audio != nil {
 			newMsg := c.Message().Audio
-			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
-				return c.Reply("⚠️回复内容转投失败，请重试。" + err.Error())
+			if len(c.Message().Audio.Caption) > 0 {
+				newMsg.Caption = c.Message().Audio.Caption
 			}
-			return c.Reply("✅回复内容转投成功。")
+			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
+				return c.Reply("⚠️回复内容(OnAudio)转投失败，请重试。" + err.Error())
+			}
+			return c.Reply("✅回复内容(OnAudio)转投成功。")
 		}
-		return c.Reply("⚠️回复内容转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
+		return c.Reply("⚠️回复内容(OnAudio)转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
 	}
 
 	// 收到私聊消息
@@ -378,17 +383,17 @@ func OnPrivateSendToMeByAnimation(c tele.Context) error {
 		prefixLine, _, isFound := strings.Cut(replyToText+"\n", "\n")
 		if !isFound {
 			return c.Reply(
-				fmt.Sprintf("回复消息格式异常(OnText)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
+				fmt.Sprintf("回复消息格式异常(OnAnimation)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
 			)
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
 		if !isFound {
-			return c.Reply("回复消息格式异常(OnAudio)(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply("回复消息格式异常(OnAnimation)(sendToID): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
 		}
 
 		reciverId, err := strconv.ParseInt(sendToID, 10, 64)
 		if err != nil {
-			fmt.Print("回复消息格式异常(OnAudio): 待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
+			fmt.Print("回复消息格式异常(OnAnimation): 待回复id %s\n%+v", sendToID, c.Message().ReplyTo)
 		}
 		reciver := &tele.User{
 			ID: reciverId,
@@ -396,12 +401,15 @@ func OnPrivateSendToMeByAnimation(c tele.Context) error {
 
 		if c.Message().Animation != nil {
 			newMsg := c.Message().Animation
-			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
-				return c.Reply("⚠️回复内容转投失败，请重试。" + err.Error())
+			if len(c.Message().Animation.Caption) > 0 {
+				newMsg.Caption = c.Message().Animation.Caption
 			}
-			return c.Reply("✅回复内容转投成功。")
+			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
+				return c.Reply("⚠️回复内容(OnAnimation)转投失败，请重试。" + err.Error())
+			}
+			return c.Reply("✅回复内容(OnAnimation)转投成功。")
 		}
-		return c.Reply("⚠️回复内容转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
+		return c.Reply("⚠️回复内容(OnAnimation)转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
 	}
 
 	// 收到私聊消息
@@ -483,7 +491,7 @@ func OnPrivateSendToMeByDocument(c tele.Context) error {
 		prefixLine, _, isFound := strings.Cut(replyToText+"\n", "\n")
 		if !isFound {
 			return c.Reply(
-				fmt.Sprintf("回复消息格式异常(OnText)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
+				fmt.Sprintf("回复消息格式异常(OnDocument)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
 			)
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
@@ -501,12 +509,15 @@ func OnPrivateSendToMeByDocument(c tele.Context) error {
 
 		if c.Message().Document != nil {
 			newMsg := c.Message().Document
-			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
-				return c.Reply("⚠️回复内容转投失败，请重试。" + err.Error())
+			if len(c.Message().Document.Caption) > 0 {
+				newMsg.Caption = c.Message().Document.Caption
 			}
-			return c.Reply("✅回复内容转投成功。")
+			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
+				return c.Reply("⚠️回复内容(OnDocument)转投失败，请重试。" + err.Error())
+			}
+			return c.Reply("✅回复内容(OnDocument)转投成功。")
 		}
-		return c.Reply("⚠️回复内容转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
+		return c.Reply("⚠️回复内容转(OnDocument)投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
 	}
 
 	// 收到私聊消息
@@ -588,7 +599,7 @@ func OnPrivateSendToMeByVideo(c tele.Context) error {
 		prefixLine, _, isFound := strings.Cut(replyToText+"\n", "\n")
 		if !isFound {
 			return c.Reply(
-				fmt.Sprintf("回复消息格式异常(OnText)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
+				fmt.Sprintf("回复消息格式异常(OnVideo)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
 			)
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
@@ -606,12 +617,15 @@ func OnPrivateSendToMeByVideo(c tele.Context) error {
 
 		if c.Message().Video != nil {
 			newMsg := c.Message().Video
-			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
-				return c.Reply("⚠️回复内容转投失败，请重试。" + err.Error())
+			if len(c.Message().Video.Caption) > 0 {
+				newMsg.Caption = c.Message().Video.Caption
 			}
-			return c.Reply("✅回复内容转投成功。")
+			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
+				return c.Reply("⚠️回复内容(OnVideo)转投失败，请重试。" + err.Error())
+			}
+			return c.Reply("✅回复内容(OnVideo)转投成功。")
 		}
-		return c.Reply("⚠️回复内容转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
+		return c.Reply("⚠️回复内容(OnVideo)转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
 	}
 
 	// 收到私聊消息
@@ -693,7 +707,7 @@ func OnPrivateSendToMeByVoice(c tele.Context) error {
 		prefixLine, _, isFound := strings.Cut(replyToText+"\n", "\n")
 		if !isFound {
 			return c.Reply(
-				fmt.Sprintf("回复消息格式异常(OnText)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
+				fmt.Sprintf("回复消息格式异常(OnVoice)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
 			)
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
@@ -711,12 +725,15 @@ func OnPrivateSendToMeByVoice(c tele.Context) error {
 
 		if c.Message().Voice != nil {
 			newMsg := c.Message().Voice
-			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
-				return c.Reply("⚠️回复内容转投失败，请重试。" + err.Error())
+			if len(c.Message().Voice.Caption) > 0 {
+				newMsg.Caption = c.Message().Voice.Caption
 			}
-			return c.Reply("✅回复内容转投成功。")
+			if _, err := c.Bot().Send(reciver, newMsg); err != nil {
+				return c.Reply("⚠️回复内容(OnVoice)转投失败，请重试。" + err.Error())
+			}
+			return c.Reply("✅回复内容(OnVoice)转投成功。")
 		}
-		return c.Reply("⚠️回复内容转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
+		return c.Reply("⚠️回复内容(OnVoice)转投失败，请重试。" + fmt.Sprintf("获取图片信息失败: %+v", c.Message()))
 	}
 
 	// 收到私聊消息
