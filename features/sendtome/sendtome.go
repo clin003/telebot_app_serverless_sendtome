@@ -69,7 +69,9 @@ func OnPrivateSendToMe(c tele.Context) error {
 		}
 		prefixLine, _, isFound := strings.Cut(replyToText, "\n")
 		if !isFound {
-			return c.Reply("回复消息格式异常(OnText)(prefixLine): " + fmt.Sprintf("%+v", c.Message().ReplyTo))
+			return c.Reply(
+				fmt.Sprintf("回复消息格式异常(OnText)(prefixLine: %s): %+v", replyToText, c.Message().ReplyTo),
+			)
 		}
 		_, sendToID, isFound := strings.Cut(prefixLine, "#id")
 		if !isFound {
