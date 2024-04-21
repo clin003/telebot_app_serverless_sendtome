@@ -2,13 +2,6 @@ A serverless Telegram bot
 
 TG SendToMe BOT
 
-Telegram 全功能私聊机器人
-
-双向私聊机器人，这里是为双向用户无法联系而提供的解决方案！
-
-# TG SendToMe BOT
-
-A Telegram bot 双向私聊机器人
 
 ## 部署到 Vercel
 
@@ -38,10 +31,3 @@ SEND_CRYPTO_USDT_MSG
 ##  交流群
 
 交流TG群： [@baicai_dev](https://t.me/baicai_pub)
-
-<!--
-## 赞赏
-![赞赏白菜林，多少不重要，1元也是支持](https://cdn.jsdelivr.net/gh/clin003/cdn/assets/images/zanalipay.jpg)
-
-![赞赏白菜林，多少不重要，1元也是支持](https://cdn.jsdelivr.net/gh/clin003/cdn/assets/images/zanweixin.jpg)
--->
